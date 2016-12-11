@@ -728,6 +728,8 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 
 	assert( inflictor );
 
+	G_PrintMsg(attacker, "G_RadiusDamage minkb:%f, maxkb:%f\n", inflictor->projectileInfo.minKnockback, inflictor->projectileInfo.maxKnockback);
+
 	maxdamage = inflictor->projectileInfo.maxDamage;
 	mindamage = inflictor->projectileInfo.minDamage;
 	maxknockback = inflictor->projectileInfo.maxKnockback;
@@ -769,9 +771,9 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 			{
 				weapondef = GS_GetWeaponDef( WEAP_ROCKETLAUNCHER );
 				// racesow
-				rs_minKnockback = rs_rocket_minKnockback->integer;
-				rs_maxKnockback = rs_rocket_maxKnockback->integer;
-				rs_radius = rs_rocket_splash->integer;
+				//rs_minKnockback = rs_rocket_minKnockback->integer;
+				//rs_maxKnockback = rs_rocket_maxKnockback->integer;
+				//rs_radius = rs_rocket_splash->integer;
 				rs_splashfrac = rs_rocket_splashfrac->value;
 				// !racesow
 			}
@@ -779,9 +781,9 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 			{
 				weapondef = GS_GetWeaponDef( WEAP_GRENADELAUNCHER );
 				// racesow
-				rs_minKnockback = rs_grenade_minKnockback->integer;
-				rs_maxKnockback = rs_grenade_maxKnockback->integer;
-				rs_radius = rs_grenade_splash->integer;
+				//rs_minKnockback = rs_grenade_minKnockback->integer;
+				//rs_maxKnockback = rs_grenade_maxKnockback->integer;
+				//rs_radius = rs_grenade_splash->integer;
 				rs_splashfrac = rs_grenade_splashfrac->value;
 				// !racesow
 			}
@@ -789,9 +791,9 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 			{
 				weapondef = GS_GetWeaponDef( WEAP_PLASMAGUN );
 				// racesow
-				rs_minKnockback = rs_plasma_minKnockback->integer;
-				rs_maxKnockback = rs_plasma_maxKnockback->integer;
-				rs_radius = rs_plasma_splash->integer;
+				//rs_minKnockback = rs_plasma_minKnockback->integer;
+				//rs_maxKnockback = rs_plasma_maxKnockback->integer;
+				//rs_radius = rs_plasma_splash->integer;
 				rs_splashfrac = rs_plasma_splashfrac->value;
 				// !racesow
 			}
@@ -799,20 +801,21 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 			{
 				weapondef = GS_GetWeaponDef( WEAP_GUNBLADE );
 				// racesow - TODO: decide default values
-				rs_minKnockback = rs_gunblade_minKnockback->integer;
-				rs_maxKnockback = rs_gunblade_maxKnockback->integer;
-				rs_radius = rs_gunblade_splash->integer;
+				//rs_minKnockback = rs_gunblade_minKnockback->integer;
+				//rs_maxKnockback = rs_gunblade_maxKnockback->integer;
+				//rs_radius = rs_gunblade_splash->integer;
 				rs_splashfrac = rs_rocket_splashfrac->value;
 				// !racesow
 			}
 
 			// racesow
-			if( weapondef && rs_minKnockback && rs_maxKnockback && rs_radius )
+			if( weapondef /*&& rs_minKnockback && rs_maxKnockback && rs_radius*/ )
 			{
-				RS_SplashFrac4D( ENTNUM( ent ), inflictor->s.origin, rs_radius, pushDir, &kickFrac, NULL, 0, rs_splashfrac );
+				RS_SplashFrac4D( ENTNUM( ent ), inflictor->s.origin, radius, pushDir, &kickFrac, NULL, 0, rs_splashfrac );
 
-				clamp_high( rs_minKnockback, rs_maxKnockback );
-				knockback = ( rs_minKnockback + ( (float)( rs_maxKnockback - rs_minKnockback ) * kickFrac ) ) * g_self_knockback->value;
+				knockback = ( minknockback + ( (float)( maxknockback - minknockback ) * kickFrac ) ) * g_self_knockback->value;
+
+				G_PrintMsg(attacker, "G_RadiusDamage actual kb:%f\n", knockback);
 				damage *= weapondef->firedef.selfdamage;
 			}
 			// !racesow

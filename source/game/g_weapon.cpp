@@ -760,9 +760,9 @@ edict_t *W_Fire_Grenade( edict_t *self, vec3_t start, vec3_t angles, int speed, 
 
 	grenade = W_Fire_TossProjectile( self, start, angles,
 		rs_grenade_speed->integer, damage,
-		rs_grenade_minKnockback->integer,
-		rs_grenade_maxKnockback->integer,
-		stun, minDamage, rs_grenade_splash->integer,
+		minKnockback,
+		maxKnockback,
+		stun, minDamage, radius,
 		rs_grenade_timeout->integer, timeDelta ); // racesow
 	VectorClear( grenade->s.angles );
 	grenade->style = mod;
@@ -875,9 +875,11 @@ edict_t *W_Fire_Rocket( edict_t *self, vec3_t start, vec3_t angles, int speed, f
 		damage = 9999;
 
 	rocket = W_Fire_LinearProjectile( self, start, angles, new_speed,
-		damage, rs_rocket_minKnockback->integer,
-		rs_rocket_maxKnockback->integer, stun, minDamage,
-		rs_rocket_splash->integer, timeout, timeDelta ); // racesow
+		damage, minKnockback,
+		maxKnockback, stun, minDamage,
+		radius, timeout, timeDelta ); // racesow
+
+	G_PrintMsg(self, "W_Fire_Rocket minkb: %i, maxkb: %i\n", minKnockback, maxKnockback);
 
 	rocket->s.type = ET_ROCKET; //rocket trail sfx
 	if( mod == MOD_ROCKET_S )
@@ -1045,9 +1047,10 @@ edict_t *W_Fire_Plasma( edict_t *self, vec3_t start, vec3_t angles, float damage
 
 	plasma = W_Fire_LinearProjectile( self, start, angles,
 		rs_plasma_speed->integer, damage,
-		rs_plasma_minKnockback->integer,
-		rs_plasma_maxKnockback->integer, stun, minDamage,
-		rs_plasma_splash->integer, timeout, timeDelta ); // racesow
+		minKnockback,
+		maxKnockback,
+		stun, minDamage, radius,
+		timeout, timeDelta); // racesow
 	plasma->s.type = ET_PLASMA;
 	plasma->classname = "plasma";
 	plasma->style = mod;

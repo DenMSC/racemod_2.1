@@ -332,11 +332,11 @@ static edict_t *G_Fire_Gunblade_Blast( vec3_t origin, vec3_t angles, firedef_t *
 	mod = ( firedef->fire_mode == FIRE_MODE_STRONG ) ? MOD_GUNBLADE_S : MOD_GUNBLADE_W;
 	speed = firedef->speed;
 	damage = firedef->damage;
-	knockback = firedef->knockback;
+	knockback = rs_gunblade_maxKnockback->integer;
 	stun = firedef->stun;
 	minDamage = firedef->mindamage;
-	minKnockback = firedef->minknockback;
-	radius = firedef->splash_radius;
+	minKnockback = rs_gunblade_minKnockback->integer;
+	radius = rs_gunblade_splash->integer;
 
 	if( is_quad )
 	{
@@ -369,11 +369,11 @@ static edict_t *G_Fire_Rocket( vec3_t origin, vec3_t angles, firedef_t *firedef,
 	mod = ( firedef->fire_mode == FIRE_MODE_STRONG ) ? MOD_ROCKET_S : MOD_ROCKET_W;
 	speed = firedef->speed;
 	damage = firedef->damage;
-	knockback = firedef->knockback;
+	knockback = rs_rocket_maxKnockback->integer;
 	stun = firedef->stun;
 	minDamage = firedef->mindamage;
-	minKnockback = firedef->minknockback;
-	radius = firedef->splash_radius;
+	minKnockback = rs_rocket_minKnockback->integer;
+	radius = rs_rocket_splash->integer;
 
 	if( is_quad )
 	{
@@ -470,11 +470,11 @@ static edict_t *G_Fire_Grenade( vec3_t origin, vec3_t angles, firedef_t *firedef
 	mod = ( firedef->fire_mode == FIRE_MODE_STRONG ) ? MOD_GRENADE_S : MOD_GRENADE_W;
 	speed = firedef->speed;
 	damage = firedef->damage;
-	knockback = firedef->knockback;
+	knockback = rs_grenade_maxKnockback->integer;
 	stun = firedef->stun;
 	minDamage = firedef->mindamage;
-	minKnockback = firedef->minknockback;
-	radius = firedef->splash_radius;
+	minKnockback = rs_grenade_minKnockback->integer;
+	radius = rs_grenade_splash->integer;
 
 	if( is_quad )
 	{
@@ -508,11 +508,11 @@ static edict_t *G_Fire_Plasma( vec3_t origin, vec3_t angles, firedef_t *firedef,
 	mod = ( firedef->fire_mode == FIRE_MODE_STRONG ) ? MOD_PLASMA_S : MOD_PLASMA_W;
 	speed = firedef->speed;
 	damage = firedef->damage;
-	knockback = firedef->knockback;
+	knockback = rs_plasma_maxKnockback->integer;
 	stun = firedef->stun;
 	minDamage = firedef->mindamage;
-	minKnockback = firedef->minknockback;
-	radius = firedef->splash_radius;
+	minKnockback = rs_plasma_minKnockback->integer;
+	radius = rs_plasma_splash->integer;
 
 	if( is_quad )
 	{
