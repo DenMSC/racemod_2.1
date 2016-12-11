@@ -728,8 +728,6 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 
 	assert( inflictor );
 
-	G_PrintMsg(attacker, "G_RadiusDamage minkb:%f, maxkb:%f\n", inflictor->projectileInfo.minKnockback, inflictor->projectileInfo.maxKnockback);
-
 	maxdamage = inflictor->projectileInfo.maxDamage;
 	mindamage = inflictor->projectileInfo.minDamage;
 	maxknockback = inflictor->projectileInfo.maxKnockback;
@@ -815,7 +813,6 @@ void G_RadiusDamage( edict_t *inflictor, edict_t *attacker, cplane_t *plane, edi
 
 				knockback = ( minknockback + ( (float)( maxknockback - minknockback ) * kickFrac ) ) * g_self_knockback->value;
 
-				G_PrintMsg(attacker, "G_RadiusDamage actual kb:%f\n", knockback);
 				damage *= weapondef->firedef.selfdamage;
 			}
 			// !racesow

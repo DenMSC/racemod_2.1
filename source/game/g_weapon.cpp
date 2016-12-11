@@ -879,8 +879,6 @@ edict_t *W_Fire_Rocket( edict_t *self, vec3_t start, vec3_t angles, int speed, f
 		maxKnockback, stun, minDamage,
 		radius, timeout, timeDelta ); // racesow
 
-	G_PrintMsg(self, "W_Fire_Rocket minkb: %i, maxkb: %i\n", minKnockback, maxKnockback);
-
 	rocket->s.type = ET_ROCKET; //rocket trail sfx
 	if( mod == MOD_ROCKET_S )
 	{
